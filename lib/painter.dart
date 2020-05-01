@@ -12,6 +12,7 @@ class ScratchPainter extends CustomPainter {
     this.color,
     this.image,
     this.imageFit,
+    this.radius,
     this.onDraw,
   });
 
@@ -29,6 +30,9 @@ class ScratchPainter extends CustomPainter {
 
   /// Determine how the image should fit the scratch area
   final BoxFit imageFit;
+  
+  /// Determine the roundedness of the rectangle
+  final double radius;
 
   /// Callback called each time the painter is redraw
   final DrawFunction onDraw;
@@ -51,7 +55,8 @@ class ScratchPainter extends CustomPainter {
     canvas.saveLayer(null, Paint());
 
     var areaRect = Rect.fromLTRB(0, 0, size.width, size.height);
-    canvas.drawRect(areaRect, Paint()..color = color);
+    var roundedRect = RRect.fromRectAndRadius(areaRect, Radius.circular(radius));
+    canvas.drawRRect(roundedRect, Paint()..color = color);
     if (image != null) {
       var imageSize = Size(image.width.toDouble(), image.height.toDouble());
       var sizes = applyBoxFit(imageFit, imageSize, size);
