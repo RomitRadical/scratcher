@@ -2,9 +2,7 @@ import 'dart:async';
 import 'dart:math';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
-
 import 'package:flutter/material.dart';
-
 import 'painter.dart';
 
 const progressReportStep = 0.1;
@@ -70,8 +68,8 @@ class Scratcher extends StatefulWidget {
 
   /// Callback called when new part of area is revealed (min 0.1% difference).
   final Function(double value) onChange;
-  
-  /// Determine the roundedness of the rectangle by a radius 
+
+  /// Determine the roundedness of the rectangle by a radius
   final double radius;
 
   /// Callback called when threshold is reached.
@@ -121,9 +119,8 @@ class ScratcherState extends State<Scratcher> {
           var paint = CustomPaint(
             foregroundPainter: ScratchPainter(
               image: snapshot.data,
-              imageFit: widget.image == null
-                  ? null
-                  : widget.image.fit ?? BoxFit.cover,
+              imageFit:
+                  widget.image == null ? null : widget.image.fit ?? BoxFit.fill,
               points: points,
               brushSize: widget.brushSize,
               color: widget.color,

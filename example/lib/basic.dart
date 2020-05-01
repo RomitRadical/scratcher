@@ -20,6 +20,7 @@ class _BasicScreenState extends State<BasicScreen> {
           key: key,
           brushSize: 30,
           threshold: 30,
+          radius: 15,
           color: Colors.red,
           onThreshold: () => setState(() => thresholdReached = true),
           onChange: (value) {

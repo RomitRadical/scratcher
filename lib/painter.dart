@@ -2,10 +2,12 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 
+/// Draw function
 typedef DrawFunction(Size size);
 
 /// Custom painter object which handles revealing of color/image
 class ScratchPainter extends CustomPainter {
+  /// Scratch Painter class
   ScratchPainter({
     this.points,
     this.brushSize,
@@ -30,7 +32,7 @@ class ScratchPainter extends CustomPainter {
 
   /// Determine how the image should fit the scratch area
   final BoxFit imageFit;
-  
+
   /// Determine the roundedness of the rectangle
   final double radius;
 
@@ -55,7 +57,8 @@ class ScratchPainter extends CustomPainter {
     canvas.saveLayer(null, Paint());
 
     var areaRect = Rect.fromLTRB(0, 0, size.width, size.height);
-    var roundedRect = RRect.fromRectAndRadius(areaRect, Radius.circular(radius));
+    var rad = Radius.circular(radius);
+    var roundedRect = RRect.fromRectAndRadius(areaRect, rad);
     canvas.drawRRect(roundedRect, Paint()..color = color);
     if (image != null) {
       var imageSize = Size(image.width.toDouble(), image.height.toDouble());
