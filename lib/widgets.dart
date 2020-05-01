@@ -3,6 +3,7 @@ import 'dart:math';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/basic.dart';
 import 'painter.dart';
 
 const progressReportStep = 0.1;
@@ -163,7 +164,7 @@ class ScratcherState extends State<Scratcher> {
                   ? Stack(
                       children: [
                         isFinished ? widget.child : paint,
-                        Align(alignment: Alignment.center, child: widget.text)
+                        Center(child: widget.text)
                       ],
                     )
                   : isFinished ? widget.child : paint,
