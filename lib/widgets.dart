@@ -42,6 +42,7 @@ class Scratcher extends StatefulWidget {
     this.accuracy = ScratchAccuracy.high,
     this.color = Colors.black,
     this.image,
+    this.text,
     this.onChange,
     this.radius,
     this.onThreshold,
@@ -65,6 +66,9 @@ class Scratcher extends StatefulWidget {
 
   /// Image widget used to cover the child widget.
   final Image image;
+
+  /// Text widget used to show in the center of the widget.
+  final Text text;
 
   /// Callback called when new part of area is revealed (min 0.1% difference).
   final Function(double value) onChange;
@@ -155,7 +159,14 @@ class ScratcherState extends State<Scratcher> {
               duration: transitionDuration == null
                   ? const Duration(milliseconds: 0)
                   : transitionDuration,
-              child: isFinished ? widget.child : paint,
+              child: widget.text != null
+                  ? Stack(
+                      children: [
+                        isFinished ? widget.child : paint,
+                        Align(alignment: Alignment.center, child: widget.text)
+                      ],
+                    )
+                  : isFinished ? widget.child : paint,
             ),
           );
         }
