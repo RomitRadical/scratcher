@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/basic.dart';
+import 'package:flutter/src/widgets/container.dart';
 import 'painter.dart';
 
 const progressReportStep = 0.1;
@@ -163,8 +164,10 @@ class ScratcherState extends State<Scratcher> {
               child: widget.text != null
                   ? Stack(
                       children: [
-                        isFinished ? widget.child : paint,
-                        Center(child: widget.text)
+                        Expanded(
+                          child: isFinished ? widget.child : paint,
+                        ),
+                        Expanded(child: Center(child: widget.text))
                       ],
                     )
                   : isFinished ? widget.child : paint,
