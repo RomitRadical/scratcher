@@ -45,6 +45,7 @@ class Scratcher extends StatefulWidget {
     this.color = Colors.black,
     this.image,
     this.onChange,
+    this.radius,
     this.onThreshold,
   }) : super(key: key);
 
@@ -69,6 +70,9 @@ class Scratcher extends StatefulWidget {
 
   /// Callback called when new part of area is revealed (min 0.1% difference).
   final Function(double value) onChange;
+  
+  /// Determine the roundedness of the rectangle by a radius 
+  final double radius;
 
   /// Callback called when threshold is reached.
   final Function() onThreshold;
@@ -123,6 +127,7 @@ class ScratcherState extends State<Scratcher> {
               points: points,
               brushSize: widget.brushSize,
               color: widget.color,
+              radius: widget.radius,
               onDraw: (size) {
                 if (totalCheckpoints == 0) {
                   _setCheckpoints(size);
