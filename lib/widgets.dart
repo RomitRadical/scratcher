@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/basic.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'painter.dart';
+import 'package:scratcher/utils.dart';
 
 const _progressReportStep = 0.1;
 
@@ -89,7 +90,7 @@ class ScratcherState extends State<Scratcher> {
   Future<ui.Image> _imageLoader;
   Offset _lastPosition;
 
-  List<Offset> points = [];
+  List<ScratchPoint> points = [];
   Set<Offset> checkpoints;
   Set<Offset> checked = {};
   int totalCheckpoints = 0;
@@ -128,7 +129,6 @@ class ScratcherState extends State<Scratcher> {
               imageFit:
                   widget.image == null ? null : widget.image.fit ?? BoxFit.fill,
               points: points,
-              brushSize: widget.brushSize,
               color: widget.color,
               radius: widget.radius,
               onDraw: (size) {
@@ -224,7 +224,7 @@ class ScratcherState extends State<Scratcher> {
     }
 
     setState(() {
-      points.add(point);
+      points.add(ScratchPoint(point, widget.brushSize));
     });
 
     if (point != null && !checked.contains(point)) {

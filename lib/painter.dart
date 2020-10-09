@@ -1,6 +1,7 @@
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
+import 'package:scratcher/utils.dart';
 
 /// Draw function
 typedef _DrawFunction(Size size);
@@ -10,7 +11,6 @@ class ScratchPainter extends CustomPainter {
   /// Scratch Painter class
   ScratchPainter({
     this.points,
-    this.brushSize,
     this.color,
     this.image,
     this.imageFit,
@@ -19,10 +19,7 @@ class ScratchPainter extends CustomPainter {
   });
 
   /// List of revealed points from scratcher
-  final List<Offset> points;
-
-  /// Size of the brush used during reveal
-  final double brushSize;
+  final List<ScratchPoint> points;
 
   /// Background color of the scratch area
   final Color color;
@@ -39,11 +36,11 @@ class ScratchPainter extends CustomPainter {
   /// Callback called each time the painter is redraw
   final _DrawFunction onDraw;
 
-  Paint get _mainPaint {
+  Paint _getMainPaint(double strokeWidth) {
     final paint = Paint()
       ..strokeCap = StrokeCap.round
       ..color = Colors.transparent
-      ..strokeWidth = brushSize
+      ..strokeWidth = strokeWidth
       ..blendMode = BlendMode.src
       ..style = PaintingStyle.stroke;
 
@@ -72,24 +69,31 @@ class ScratchPainter extends CustomPainter {
 
     var path = Path();
     var isStarted = false;
+    ScratchPoint previousPoint;
+
     for (final point in points) {
       if (point == null) {
-        canvas.drawPath(path, _mainPaint);
+        canvas.drawPath(path, _getMainPaint(previousPoint.size));
         path = Path();
         isStarted = false;
       } else {
+        final position = point.position;
         if (!isStarted) {
           isStarted = true;
-          path.moveTo(point.dx, point.dy);
+          path.moveTo(position.dx, position.dy);
         } else {
-          path.lineTo(point.dx, point.dy);
+          path.lineTo(position.dx, position.dy);
         }
       }
+
+      previousPoint = point;
     }
 
-    canvas
-      ..drawPath(path, _mainPaint)
-      ..restore();
+    if (previousPoint != null) {
+      canvas.drawPath(path, _getMainPaint(previousPoint.size));
+    }
+
+    canvas.restore();
   }
 
   @override
