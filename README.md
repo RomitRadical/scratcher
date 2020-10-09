@@ -2,7 +2,7 @@
 
 Scratch card widget which temporarily hides content from user.
 
-[![Version](https://img.shields.io/badge/pub-v1.3.0-blue.svg)](https://pub.dartlang.org/packages/scratcher)
+[![Version](https://img.shields.io/badge/pub-v1.4.0-blue.svg)](https://pub.dartlang.org/packages/scratcher)
 
 ![Demo](https://media.giphy.com/media/fXztsRTXoKsVuChtTl/giphy.gif)
 
@@ -19,7 +19,7 @@ Scratch card widget which temporarily hides content from user.
 
 ```yaml
 dependencies:
-  scratcher: "^1.3.0"
+  scratcher: "^1.4.0"
 ```
 
 2. Now you can install it by running `flutter pub get` or through code editor.
