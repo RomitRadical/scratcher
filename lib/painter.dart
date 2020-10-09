@@ -3,7 +3,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 
 /// Draw function
-typedef DrawFunction(Size size);
+typedef _DrawFunction(Size size);
 
 /// Custom painter object which handles revealing of color/image
 class ScratchPainter extends CustomPainter {
@@ -37,10 +37,10 @@ class ScratchPainter extends CustomPainter {
   final double radius;
 
   /// Callback called each time the painter is redraw
-  final DrawFunction onDraw;
+  final _DrawFunction onDraw;
 
-  Paint get mainPaint {
-    var paint = Paint()
+  Paint get _mainPaint {
+    final paint = Paint()
       ..strokeCap = StrokeCap.round
       ..color = Colors.transparent
       ..strokeWidth = brushSize
@@ -56,25 +56,25 @@ class ScratchPainter extends CustomPainter {
 
     canvas.saveLayer(null, Paint());
 
-    var areaRect = Rect.fromLTRB(0, 0, size.width, size.height);
-    var rad = Radius.circular(radius);
-    var roundedRect = RRect.fromRectAndRadius(areaRect, rad);
+    final areaRect = Rect.fromLTRB(0, 0, size.width, size.height);
+    final rad = Radius.circular(radius);
+    final roundedRect = RRect.fromRectAndRadius(areaRect, rad);
     canvas.drawRRect(roundedRect, Paint()..color = color);
     if (image != null) {
-      var imageSize = Size(image.width.toDouble(), image.height.toDouble());
-      var sizes = applyBoxFit(imageFit, imageSize, size);
-      var inputSubrect =
+      final imageSize = Size(image.width.toDouble(), image.height.toDouble());
+      final sizes = applyBoxFit(imageFit, imageSize, size);
+      final inputSubrect =
           Alignment.center.inscribe(sizes.source, Offset.zero & imageSize);
-      var outputSubrect =
+      final outputSubrect =
           Alignment.center.inscribe(sizes.destination, areaRect);
       canvas.drawImageRect(image, inputSubrect, outputSubrect, Paint());
     }
 
     var path = Path();
     var isStarted = false;
-    for (var point in points) {
+    for (final point in points) {
       if (point == null) {
-        canvas.drawPath(path, mainPaint);
+        canvas.drawPath(path, _mainPaint);
         path = Path();
         isStarted = false;
       } else {
@@ -88,7 +88,7 @@ class ScratchPainter extends CustomPainter {
     }
 
     canvas
-      ..drawPath(path, mainPaint)
+      ..drawPath(path, _mainPaint)
       ..restore();
   }
 

@@ -9,16 +9,17 @@ Scratch card widget which temporarily hides content from user.
 ## Features
 
 - Android and iOS support
-- Cover content with full color or custom image 
+- Cover content with full color or custom image
 - Track the scratch progress and threshold
 - Fully configurable
 
 ## Getting started
 
 1. First thing you need to do is adding the scratcher as a project dependency in `pubspec.yaml`:
+
 ```yaml
 dependencies:
- scratcher: "^1.3.0"
+  scratcher: "^1.3.0"
 ```
 
 2. Now you can install it by running `flutter pub get` or through code editor.
@@ -26,6 +27,7 @@ dependencies:
 ## Setting up
 
 1. Import the library:
+
 ```dart
 import 'package:scratcher/scratcher.dart';
 ```
@@ -37,8 +39,8 @@ Scratcher(
   brushSize: 30,
   threshold: 50,
   color: Colors.red,
-  onChange: (value) { print("Scratch progress: $value%"); },
-  onThreshold: () { print("Threshold reached, you won!"); },
+  onChange: (value) => print("Scratch progress: $value%"),
+  onThreshold: () => print("Threshold reached, you won!"),
   child: Container(
     height: 300,
     width: 300,
@@ -49,16 +51,16 @@ Scratcher(
 
 ## Properties
 
-Property | Type | Description
---- | --- | ---
-child | Widget | Widget rendered under the scratch area.
-threshold | double | Percentage level of scratch area which should be revealed to complete.
-brushSize | double | Size of the brush. The bigger it is the faster user can scratch the card.
-accuracy | ScratchAccuracy | Determines how accurate the progress should be reported. Lower accuracy means higher performance.
-color | Color | Color used to cover the child widget.
-image | Image | Image widget used to cover the child widget.
-onChange | Function | Callback called when new part of area is revealed (min 0.1% difference).
-onThreshold | Function | Callback called when threshold is reached (only when defined).
+| Property    | Type            | Description                                                                                       |
+| ----------- | --------------- | ------------------------------------------------------------------------------------------------- |
+| child       | Widget          | Widget rendered under the scratch area.                                                           |
+| threshold   | double          | Percentage level of scratch area which should be revealed to complete.                            |
+| brushSize   | double          | Size of the brush. The bigger it is the faster user can scratch the card.                         |
+| accuracy    | ScratchAccuracy | Determines how accurate the progress should be reported. Lower accuracy means higher performance. |
+| color       | Color           | Color used to cover the child widget.                                                             |
+| image       | Image           | Image widget used to cover the child widget.                                                      |
+| onChange    | Function        | Callback called when new part of area is revealed (min 0.1% difference).                          |
+| onThreshold | Function        | Callback called when threshold is reached (only when defined).                                    |
 
 ## Programmatic access
 
@@ -84,10 +86,10 @@ RaisedButton(
 );
 ```
 
-Method | Description
---- | ---
-reset | Resets the scratcher state to the initial values.
-reveal | Reveals the whole scratcher, so than only original child is displayed.
+| Method | Description                                                            |
+| ------ | ---------------------------------------------------------------------- |
+| reset  | Resets the scratcher state to the initial values.                      |
+| reveal | Reveals the whole scratcher, so than only original child is displayed. |
 
 ## Example Project
 
