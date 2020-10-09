@@ -185,6 +185,7 @@ class ScratcherState extends State<Scratcher> {
       Uint8List bytes, {
       int cacheWidth,
       int cacheHeight,
+      bool allowUpscaling,
     }) async {
       return await ui.instantiateImageCodec(bytes);
     })
